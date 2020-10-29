@@ -79,4 +79,17 @@ for f in /docker-entrypoint-initnuxeo.d/*; do
   esac
 done
 
-exec "$@"
+if [[ "$NUXEO_ENVIRONMENT" = "dev" ]]; then
+  echo
+  echo "####################################################################################"
+  echo "# CAUTION: YOU ARE RUNNING IN DEV MODE, WHICH IS INSECURE AND NOT PRODUCTION-READY #"
+  echo "####################################################################################"
+  echo
+fi
+
+# override the command in dev environment only if the default command was not changed
+if [[ "$NUXEO_ENVIRONMENT" = "dev"  &&  "$@" = "nuxeoctl console" ]]; then
+  exec /nuxeo-run-dev.sh
+else
+  exec "$@"
+fi

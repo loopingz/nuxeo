@@ -1,0 +1,11 @@
+# useful configuration when starting Nuxeo in dev environment
+
+org.nuxeo.dev=true
+
+org.nuxeo.rest.stack.enable=true
+
+org.nuxeo.automation.trace=true
+
+# for hot reload
+nuxeo.server.sdk=true
+nuxeo.server.sdkInstallReloadTimer=true
